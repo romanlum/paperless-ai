@@ -877,7 +877,10 @@ router.post('/setup', express.json(), async (req, res) => {
           useExistingData,
           customApiKey,
           customBaseUrl,
-          customModel
+          customModel,
+          azureOpenaiEndpoint,
+          azureOpenaiDeployment,
+          azureOpenaiKey
       } = req.body;
 
       console.log('Setup request received:', req.body);
@@ -937,6 +940,9 @@ router.post('/setup', express.json(), async (req, res) => {
           CUSTOM_API_KEY: customApiKey || '',
           CUSTOM_BASE_URL: customBaseUrl || '',
           CUSTOM_MODEL: customModel || '',
+          AZURE_OPENAI_KEY: azureOpenaiKey || '',
+          AZURE_OPENAI_ENDPOINT: azureOpenaiEndpoint || '',
+          AZURE_OPENAI_DEPLOYMENT_NAME: azureOpenaiDeployment || '',
           PAPERLESS_AI_INITIAL_SETUP: 'yes'
       };
 
@@ -969,9 +975,19 @@ router.post('/setup', express.json(), async (req, res) => {
           }
           config.CUSTOM_BASE_URL = customBaseUrl;
           config.CUSTOM_API_KEY = customApiKey;
-          config.CUSTOM_MODEL = customModel;
+          config.CUSTOM_MODEL = customModel;     
+      } else if (aiProvider === 'azureOpenai') {
+      const isAzureOpenaiValid = await setupService.validateAzureOpenAIConfig(azureOpenaiEndpoint, azureOpenaiKey, azureOpenaiDeployment);
+      if (!isAzureOpenaiValid) {
+          return res.status(400).json({ 
+              error: 'Azure openai connection failed. Please check URL and Model.'
+          });
       }
-      
+      config.AZURE_OPENAI_ENDPOINT = azureOpenaiEndpoint;
+      config.AZURE_OPENAI_DEPLOYMENT_NAME = azureOpenaiDeployment;
+      config.AZURE_OPENAI_KEY = azureOpenaiKey;
+  }
+
       // Save configuration
       await setupService.saveConfig(config);
       const hashedPassword = await bcrypt.hash(password, 15);
@@ -1018,7 +1034,10 @@ router.post('/settings', express.json(), async (req, res) => {
       useExistingData,
       customApiKey,
       customBaseUrl,
-      customModel
+      customModel,
+      azureOpenaiEndpoint,
+      azureOpenaiDeployment,
+      azureOpenaiKey
     } = req.body;
 
     const currentConfig = {

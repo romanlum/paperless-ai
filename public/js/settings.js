@@ -64,8 +64,9 @@ class FormManager {
         const openaiSettings = document.getElementById('openaiSettings');
         const ollamaSettings = document.getElementById('ollamaSettings');
         const customSettings = document.getElementById('customSettings');
-        
+        const azureOpenaiSettings = document.getElementById('azureOpenaiSettings');
         // Get all provider-specific fields
+        
         const openaiKey = document.getElementById('openaiKey');
         const ollamaUrl = document.getElementById('ollamaUrl');
         const ollamaModel = document.getElementById('ollamaModel');
@@ -77,7 +78,8 @@ class FormManager {
         openaiSettings.classList.add('hidden');
         ollamaSettings.classList.add('hidden');
         customSettings.classList.add('hidden');
-        
+        azureOpenaiSettings.classList.add('hidden')
+
         // Reset all required fields
         openaiKey.required = false;
         ollamaUrl.required = false;
@@ -85,6 +87,7 @@ class FormManager {
         customBaseUrl.required = false;
         customApiKey.required = false;
         customModel.required = false;
+        //TODO
         
         // Show and set required fields based on selected provider
         switch (provider) {
@@ -102,6 +105,10 @@ class FormManager {
                 customBaseUrl.required = true;
                 customApiKey.required = true;
                 customModel.required = true;
+                break;
+            case 'azureOpenai':
+                azureOpenaiSettings.classList.remove('hidden');
+                //TODO
                 break;
         }
     }

@@ -21,6 +21,12 @@ module.exports = {
   openai: {
     apiKey: process.env.OPENAI_API_KEY
   },
+  azure_openai: {
+    apiKey: process.env.AZURE_OPENAI_KEY,
+    endpoint: process.env.AZURE_OPENAI_ENDPOINT,
+    deploymentName: process.env.AZURE_OPENAI_DEPLOYMENT_NAME
+
+  },
   ollama: {
     apiUrl: process.env.OLLAMA_API_URL || 'http://localhost:11434',
     model: process.env.OLLAMA_MODEL || 'llama2'

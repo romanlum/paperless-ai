@@ -73,6 +73,7 @@ class FormManager {
         const openaiSettings = document.getElementById('openaiSettings');
         const ollamaSettings = document.getElementById('ollamaSettings');
         const customSettings = document.getElementById('customSettings');
+        const azureOpenaiSettings = document.getElementById('azureOpenaiSettings');
         
         // Get all required fields
         const openaiKey = document.getElementById('openaiKey');
@@ -86,6 +87,7 @@ class FormManager {
         openaiSettings.style.display = 'none';
         ollamaSettings.style.display = 'none';
         customSettings.style.display = 'none';
+        azureOpenaiSettings.style.display = 'none';
         
         // Reset all required attributes
         openaiKey.required = false;
@@ -112,6 +114,9 @@ class FormManager {
                 customApiKey.required = true;
                 customModel.required = true;
                 break;
+            case 'azureOpenai':
+                azureOpenaiSettings.style.display = 'block';
+                //TODO
         }
     }
 

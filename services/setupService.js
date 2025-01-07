@@ -1,8 +1,10 @@
 const fs = require('fs').promises;
 const path = require('path');
 const axios = require('axios');
-const { OpenAI } = require('openai');
+const { OpenAI,AzureOpenAI } = require('openai');
 const config = require('../config/config');
+
+
 
 class SetupService {
   constructor() {
@@ -96,6 +98,22 @@ class SetupService {
       return response.data && response.data.response;
     } catch (error) {
       console.error('Ollama validation error:', error.message);
+      return false;
+    }
+  }
+
+  async validateAzureOpenAIConfig(endpoint, apiKey, deployment) {
+    try {
+      const openai = new AzureOpenAI({ endpoint, apiKey, apiVersion: "2024-10-21", deployment });
+      const response = await openai.chat.completions.create({
+        messages: [{ role: "user", content: "Test" }],
+      });
+      const now = new Date();
+      const timestamp = now.toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' });
+      console.log(`[DEBUG] [${timestamp}] Azure OpenAI request sent -  [${JSON.stringify(response.choices)}]`);
+      return response.choices && response.choices.length > 0;
+    } catch (error) {
+      console.error('Azure OpenAI validation error:', error.message);
       return false;
     }
   }
