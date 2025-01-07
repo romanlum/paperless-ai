@@ -11,7 +11,8 @@ class OpenAIService {
   initialize() {
     if (!this.client && config.openai.apiKey) {
       this.client = new OpenAI({
-        apiKey: config.openai.apiKey
+        apiKey: config.openai.apiKey,
+        baseURL: config.openapi.baseURL
       });
     }
   }

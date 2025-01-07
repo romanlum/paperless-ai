@@ -17,6 +17,7 @@ module.exports = {
     apiToken: process.env.PAPERLESS_API_TOKEN
   },
   openai: {
+    apiUrl: process.env.OPEN_API_URL || 'https://api.openai.com/v1',
     apiKey: process.env.OPENAI_API_KEY
   },
   ollama: {
