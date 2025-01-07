@@ -1,4 +1,4 @@
-const AzureOpenAI = require('openai');
+const { AzureOpenAI } = require('openai');
 const config = require('../config/config');
 const tiktoken = require('tiktoken');
 
@@ -9,9 +9,10 @@ class AzureOpenAIService {
   }
 
   initialize() {
-    if (!this.client && config.openai.apiKey) {
+    if (!this.client && config.azure_openai.apiKey) {
+      
       this.client = new AzureOpenAI({
-        baseURL: config.azure_openai.endpoint,
+        endpoint: config.azure_openai.endpoint,
         apiKey: config.azure_openai.apiKey,
         deployment: config.azure_openai.deploymentName,
         apiVersion: "2024-10-21"

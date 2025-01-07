@@ -110,7 +110,7 @@ class SetupService {
       });
       const now = new Date();
       const timestamp = now.toLocaleString('de-DE', { dateStyle: 'short', timeStyle: 'short' });
-      console.log(`[DEBUG] [${timestamp}] Azure OpenAI request sent -  [${JSON.stringify(response.choices)}]`);
+      console.log(`[DEBUG] [${timestamp}] Azure OpenAI request sent`);
       return response.choices && response.choices.length > 0;
     } catch (error) {
       console.error('Azure OpenAI validation error:', error.message);
