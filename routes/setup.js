@@ -1061,7 +1061,10 @@ router.post('/settings', express.json(), async (req, res) => {
       API_KEY: process.env.API_KEY || '',
       CUSTOM_API_KEY: process.env.CUSTOM_API_KEY || '',
       CUSTOM_BASE_URL: process.env.CUSTOM_BASE_URL || '',
-      CUSTOM_MODEL: process.env.CUSTOM_MODEL || ''
+      CUSTOM_MODEL: process.env.CUSTOM_MODEL || '',
+      AZURE_OPENAI_ENDPOINT: process.env.AZURE_OPENAI_ENDPOINT || '',
+      AZURE_OPENAI_KEY: process.env.AZURE_OPENAI_KEY || '',
+      AZURE_OPENAI_DEPLOYMENT_NAME: process.env.AZURE_OPENAI_DEPLOYMENT_NAME || ''
     };
 
     const normalizeArray = (value) => {
@@ -1131,6 +1134,9 @@ router.post('/settings', express.json(), async (req, res) => {
     if (customApiKey) updatedConfig.CUSTOM_API_KEY = customApiKey;
     if (customBaseUrl) updatedConfig.CUSTOM_BASE_URL = customBaseUrl;
     if (customModel) updatedConfig.CUSTOM_MODEL = customModel;
+    if (azureOpenaiDeployment) updatedConfig.AZURE_OPENAI_DEPLOYMENT_NAME = azureOpenaiDeployment;
+    if (azureOpenaiEndpoint) updatedConfig.AZURE_OPENAI_ENDPOINT = azureOpenaiEndpoint;
+    if (azureOpenaiKey) updatedConfig.AZURE_OPENAI_KEY = azureOpenaiKey;
 
     let apiToken = '';
     //generate a random secure api token
