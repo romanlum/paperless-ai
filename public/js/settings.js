@@ -73,6 +73,9 @@ class FormManager {
         const customBaseUrl = document.getElementById('customBaseUrl');
         const customApiKey = document.getElementById('customApiKey');
         const customModel = document.getElementById('customModel');
+        const azureOpenaiEndpoint = document.getElementById('azureOpenaiEndpoint');
+        const azureOpenaiKey = document.getElementById('azureOpenaiKey');
+        const azureOpenaiDeployment = document.getElementById('azureOpenaiDeployment');
         
         // Hide all settings sections first
         openaiSettings.classList.add('hidden');
@@ -87,7 +90,10 @@ class FormManager {
         customBaseUrl.required = false;
         customApiKey.required = false;
         customModel.required = false;
-        //TODO
+        azureOpenaiEndpoint.required = false;
+        azureOpenaiKey.required = false;
+        azureOpenaiDeployment.required = false;
+        
         
         // Show and set required fields based on selected provider
         switch (provider) {
@@ -108,7 +114,9 @@ class FormManager {
                 break;
             case 'azureOpenai':
                 azureOpenaiSettings.classList.remove('hidden');
-                //TODO
+                azureOpenaiEndpoint.required = true;
+                azureOpenaiKey.required = true;
+                azureOpenaiDeployment.required = true;
                 break;
         }
     }
