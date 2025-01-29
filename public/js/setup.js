@@ -88,7 +88,10 @@ class FormManager {
         ollamaSettings.style.display = 'none';
         customSettings.style.display = 'none';
         azureOpenaiSettings.style.display = 'none';
-        
+        azureOpenaiEndpoint.required = false;
+        azureOpenaiKey.required = false;
+        azureOpenaiDeployment.required = false;
+
         // Reset all required attributes
         openaiKey.required = false;
         ollamaUrl.required = false;
@@ -116,7 +119,10 @@ class FormManager {
                 break;
             case 'azureOpenai':
                 azureOpenaiSettings.style.display = 'block';
-                //TODO
+                azureOpenaiEndpoint.required = true;
+                azureOpenaiKey.required = true;
+                azureOpenaiDeployment.required = true;
+                break;
         }
     }
 
