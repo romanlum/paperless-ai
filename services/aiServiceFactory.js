@@ -2,7 +2,7 @@ const config = require('../config/config');
 const openaiService = require('./openaiService');
 const ollamaService = require('./ollamaService');
 const customService = require('./customService');
-const azureOpenaiService = require('./azureOpenaiService');
+
 
 class AIServiceFactory {
   static getService() {
